@@ -6,6 +6,7 @@ import Hero from "./components/hero";
 export default function Home() {
 
   return (
+    //Main Section
     <main className="flex min-h-screen flex-col items-center">
       <Header />
       <Hero />

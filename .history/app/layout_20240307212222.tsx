@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`{inter.className} w-full overflo-y-visible overflow-x-hidden`}>{children}</body>
+      <body className={`inter.className w-full overflo-y-visible overflow-x-hidden`}>{children}</body>
     </html>
   );
 }
