@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { FormEvent } from "react";
-import Header from "./components/header";
 
 
 
@@ -12,11 +11,11 @@ export default function Home() {
 
   return (
     //Main Section
-    <main>
-      <Header />
+    <main className="flex min-h-screen flex-col items-center pt-6 px-24">
+
       {/*Nav*/}
-{/*
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+
+      <div className="z-10 max-w-5xl w-full items-center justify-between py-8 font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 py-2 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-0 lg:dark:bg-zinc-800/30">
           Pun AI
         </p>
@@ -24,7 +23,7 @@ export default function Home() {
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           {/*<div>
             Dak
-       </div>
+  </div>*/}
           <a
             className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
             href="https://tushdev.co/"
@@ -74,7 +73,7 @@ export default function Home() {
         >
           Generate Pun
         </button>
-      </form> */}
-    </main> 
+      </form>
+    </main>
   );
 }
