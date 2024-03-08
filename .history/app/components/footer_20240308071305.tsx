@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="inline-flex p-6 max-w-3xl gap-3 items-center text-center">
             <div>
                 <Link
-                    href="https://github.com/tushcmd/next-puns-ai"
+                    href="https://github.com/#"
                     target="_blank"
                     rel="noreferrer"
                     className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
