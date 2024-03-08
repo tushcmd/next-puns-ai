@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, FormEvent } from "react";
+import Image from "next/image";
 import Spinner from "./Spinner";
 
 

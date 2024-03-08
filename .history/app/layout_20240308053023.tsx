@@ -17,12 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-background text-color {inter.className} w-full overflow-y-visible overflow-x-hidden`}>
-        <Providers>
-          {children}
-        </Providers>
-
-      </body>
+      <body className={`bg-background text-color {inter.className} w-full overflow-y-visible overflow-x-hidden`}>{children}</body>
     </html>
   );
 }
