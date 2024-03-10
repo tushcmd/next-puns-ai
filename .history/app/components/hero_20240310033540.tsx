@@ -8,7 +8,7 @@ export default function Hero() {
 
     const [pun, setPun] = useState("");
     const [punLoading, setPunLoading] = useState(false);
-    const [punLoadingError, setPunLoadingError] = useState(false);
+    const [punLoadingError, setPunLoadingError] = useState(true);
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -56,7 +56,7 @@ export default function Hero() {
                     <path d="M216,52H40A12,12,0,0,0,28,64V224a11.89,11.89,0,0,0,6.93,10.88A12.17,12.17,0,0,0,40,236a11.89,11.89,0,0,0,7.69-2.83l.06-.06,32.14-28.17A4,4,0,0,1,82.5,204H216a12,12,0,0,0,12-12V64A12,12,0,0,0,216,52Zm4,140a4,4,0,0,1-4,4H82.5a12.1,12.1,0,0,0-7.79,2.87l-32.16,28.2A4,4,0,0,1,36,224V64a4,4,0,0,1,4-4H216a4,4,0,0,1,4,4Zm-56-80a4,4,0,0,1-4,4H96a4,4,0,0,1,0-8h64A4,4,0,0,1,164,112Zm0,32a4,4,0,0,1-4,4H96a4,4,0,0,1,0-8h64A4,4,0,0,1,164,144Z"></path>
                 </svg>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col mb-8 text-center items-center">
+            <form onSubmit={handleSubmit} className="flex flex-col mb-32 text-center items-center">
                 <div className="mb-4">
                     <label className="pb-8">Enter random topic to get pun....</label>
                     <input
@@ -68,7 +68,6 @@ export default function Hero() {
                         placeholder="e.g. money, code, fruits"
                     ></input>
                 </div>
-                {/*punLoading disabled prevents user from clicking button severally */}
                 <button
                     type="submit"
                     className="mb-3 border static rounded-xl bg-zinc-700 py-2 px-4 hover:bg-zinc-400 dark:bg-white"

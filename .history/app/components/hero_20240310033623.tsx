@@ -8,7 +8,7 @@ export default function Hero() {
 
     const [pun, setPun] = useState("");
     const [punLoading, setPunLoading] = useState(false);
-    const [punLoadingError, setPunLoadingError] = useState(false);
+    const [punLoadingError, setPunLoadingError] = useState(true);
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -68,7 +68,6 @@ export default function Hero() {
                         placeholder="e.g. money, code, fruits"
                     ></input>
                 </div>
-                {/*punLoading disabled prevents user from clicking button severally */}
                 <button
                     type="submit"
                     className="mb-3 border static rounded-xl bg-zinc-700 py-2 px-4 hover:bg-zinc-400 dark:bg-white"
