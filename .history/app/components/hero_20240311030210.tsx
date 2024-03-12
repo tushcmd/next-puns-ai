@@ -70,7 +70,6 @@ export default function Hero() {
                 </div>
                 {/*punLoading disabled prevents user from clicking button severally while loading */}
                 <button
-                    name='submit'
                     type="submit"
                     className="mb-3 border static rounded-xl bg-zinc-700 py-2 px-4 hover:bg-zinc-400 dark:bg-white"
                     disabled={punLoading}
