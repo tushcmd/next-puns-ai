@@ -47,7 +47,7 @@ export default function Hero() {
                 setPunLoadingError(false);
                 setPunLoading(true);
 
-                const response = await fetch("/api/pun", {
+                const response = await fetch("/api", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

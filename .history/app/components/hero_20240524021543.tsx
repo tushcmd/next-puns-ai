@@ -14,17 +14,17 @@ export default function Hero() {
     //    e.preventDefault();
     //    const formData = new FormData(e.target as HTMLFormElement);
     //    const prompt = formData.get("prompt")?.toString().trim();
-    //
+//
     //    if (prompt) {
     //        try {
     //            setPun("");
     //            setPunLoadingError(false);
     //            setPunLoading(true);
-    //
+//
     //            const response = await fetch(
     //                '/api?prompt=' + encodeURIComponent(prompt)
     //            );
-    //
+//
     //            const body = await response.json();
     //            setPun(pun);
     //        } catch (error) {
@@ -40,36 +40,36 @@ export default function Hero() {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         const prompt = formData.get("prompt")?.toString().trim();
-
+      
         if (prompt) {
-            try {
-                setPun("");
-                setPunLoadingError(false);
-                setPunLoading(true);
-
-                const response = await fetch("/api/pun", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ prompt }),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    setPun(data.pun);
-                } else {
-                    setPunLoadingError(true);
-                }
-            } catch (error) {
-                console.error(error);
-                setPunLoadingError(true);
-            } finally {
-                setPunLoading(false);
+          try {
+            setPun("");
+            setPunLoadingError(false);
+            setPunLoading(true);
+      
+            const response = await fetch("/api/route", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ prompt }),
+            });
+      
+            const data = await response.json();
+      
+            if (response.ok) {
+              setPun(data.pun);
+            } else {
+              setPunLoadingError(true);
             }
+          } catch (error) {
+            console.error(error);
+            setPunLoadingError(true);
+          } finally {
+            setPunLoading(false);
+          }
         }
-    }
+      }
 
     return (
         <div className="flex flex-col relative justify-center items-center h-screen md:py-10 py-6 overflow-wrap max-w-3xl px-5">
@@ -116,7 +116,7 @@ export default function Hero() {
 
             {punLoading && <Spinner />}
             {punLoadingError && "Something went wrong. Please try again."}
-            {pun && <p className='text-base p-2 text-white dark:text-black'>{pun}</p>}
+            {pun && <p className='text-base p-2'>{pun}</p>}
         </div>
     );
 }

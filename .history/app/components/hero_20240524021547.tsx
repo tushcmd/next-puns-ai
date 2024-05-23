@@ -47,7 +47,7 @@ export default function Hero() {
                 setPunLoadingError(false);
                 setPunLoading(true);
 
-                const response = await fetch("/api/pun", {
+                const response = await fetch("/api/route", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export default function Hero() {
 
             {punLoading && <Spinner />}
             {punLoadingError && "Something went wrong. Please try again."}
-            {pun && <p className='text-base p-2 text-white dark:text-black'>{pun}</p>}
+            {pun && <p className='text-base p-2'>{pun}</p>}
         </div>
     );
 }
