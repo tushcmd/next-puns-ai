@@ -1,18 +1,19 @@
 'use client'
 
 import { useState, FormEvent, useRef } from "react";
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Download, Loader2, Twitter } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
 import html2canvas from 'html2canvas';
+import { Loader2, Download, Twitter } from "lucide-react";
 
 export default function Hero() {
     const [prompt, setPrompt] = useState("");
     const [pun, setPun] = useState("");
     const [punLoading, setPunLoading] = useState(false);
-    const [punLoadingError, setPunLoadingError] = useState(false);
     const punRef = useRef<HTMLDivElement>(null);
+    const { toast } = useToast();
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -20,7 +21,6 @@ export default function Hero() {
         if (trimmedPrompt) {
             try {
                 setPun("");
-                setPunLoadingError(false);
                 setPunLoading(true);
                 const response = await fetch("/api/pun", {
                     method: "POST",
@@ -31,11 +31,19 @@ export default function Hero() {
                 if (response.ok) {
                     setPun(data.pun);
                 } else {
-                    setPunLoadingError(true);
+                    toast({
+                        title: "Error",
+                        description: "Failed to generate pun. Please try again.",
+                        variant: "destructive",
+                    });
                 }
             } catch (error) {
                 console.error('Fetch error:', error);
-                setPunLoadingError(true);
+                toast({
+                    title: "Error",
+                    description: "An unexpected error occurred. Please try again.",
+                    variant: "destructive",
+                });
             } finally {
                 setPunLoading(false);
             }
@@ -63,72 +71,52 @@ export default function Hero() {
     };
 
     return (
-        <div className="flex flex-col relative justify-center items-center h-screen md:py-10 py-6 overflow-wrap max-w-3xl px-5">
-            <h1 className="text-3xl font-bold pb-4 bg-gradient-to-br from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
-                Pun AI
-            </h1>
-            {/* <p className="text-base font-bold">powered by GPT-3</p> */}
-            <p className="text-sm mb-4">
-                Hey champ! Generate a random pun from a topic to brighten your day
-            </p>
-            <Card className="w-full mb-4">
-                <CardContent className="pt-6">
-                    <div ref={punRef} className="relative w-full flex items-center justify-center aspect-[10/5] min-h-[200px]">
-                        {punLoading ? (
-                            <Loader2 className="h-8 w-8 animate-spin" />
-                        ) : punLoadingError ? (
-                            <p className="text-red-500">Something went wrong. Please try again.</p>
-                        ) : pun ? (
-                            <p className="text-md text-center">{pun}</p>
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-purple-400 to-indigo-600">
+            <Card className="w-full max-w-md">
+                <CardHeader>
+                    <CardTitle className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+                        Pun AI
+                    </CardTitle>
+                    <CardDescription className="text-center">
+                        Generate a witty pun from any topic!
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <Input
+                            value={prompt}
+                            onChange={(e) => setPrompt(e.target.value)}
+                            placeholder="e.g. money, code, fruits"
+                        />
+                        <Button type="submit" className="w-full" disabled={punLoading}>
+                            {punLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                            Generate Pun
+                        </Button>
+                    </form>
+                    <div ref={punRef} className="mt-4 p-4 bg-white rounded-lg min-h-[100px] flex items-center justify-center">
+                        {pun ? (
+                            <p className="text-lg text-center text-black">{pun}</p>
                         ) : (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="120"
-                                height="120"
-                                fill="#34b29b"
-                                viewBox="0 0 256 256"
-                            >
-                                <path d="M216,52H40A12,12,0,0,0,28,64V224a11.89,11.89,0,0,0,6.93,10.88A12.17,12.17,0,0,0,40,236a11.89,11.89,0,0,0,7.69-2.83l.06-.06,32.14-28.17A4,4,0,0,1,82.5,204H216a12,12,0,0,0,12-12V64A12,12,0,0,0,216,52Zm4,140a4,4,0,0,1-4,4H82.5a12.1,12.1,0,0,0-7.79,2.87l-32.16,28.2A4,4,0,0,1,36,224V64a4,4,0,0,1,4-4H216a4,4,0,0,1,4,4Zm-56-80a4,4,0,0,1-4,4H96a4,4,0,0,1,0-8h64A4,4,0,0,1,164,112Zm0,32a4,4,0,0,1-4,4H96a4,4,0,0,1,0-8h64A4,4,0,0,1,164,144Z"></path>
-                            </svg>
+                            <p className="text-gray-400">Your pun will appear here</p>
                         )}
                     </div>
                 </CardContent>
+                {pun && (
+                    <CardFooter className="flex justify-center space-x-2">
+                        <Button onClick={downloadPunAsImage} variant="outline">
+                            <Download className="mr-2 h-4 w-4" />
+                            Download
+                        </Button>
+                        <Button onClick={shareOnTwitter} variant="outline">
+                            <Twitter className="mr-2 h-4 w-4" />
+                            Tweet
+                        </Button>
+                    </CardFooter>
+                )}
             </Card>
-            <form onSubmit={handleSubmit} className="flex flex-col mb-8 text-center items-center w-full">
-                <div className="mb-4 w-full">
-                    <label className="pb-2 block">Enter random topic to get pun....</label>
-                    <Input
-                        value={prompt}
-                        onChange={(e) => setPrompt(e.target.value)}
-                        id="prompt-input"
-                        type="text"
-                        placeholder="e.g. money, code, fruits"
-                    />
-                </div>
-                <Button type="submit" disabled={punLoading}>
-                    Generate Pun
-                </Button>
-            </form>
-            {pun && (
-                <div className="flex space-x-4">
-                    <Button onClick={downloadPunAsImage} variant="outline">
-                        <Download className="mr-2 h-4 w-4" />
-                        Download
-                    </Button>
-                    <Button onClick={shareOnTwitter} variant="outline">
-                        <Twitter className="mr-2 h-4 w-4" />
-                        Tweet
-                    </Button>
-                </div>
-            )}
         </div>
     );
 }
-
-
-
-
-
 
 // pun in a card
 

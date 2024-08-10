@@ -67,7 +67,7 @@ export default function Hero() {
             <h1 className="text-3xl font-bold pb-4 bg-gradient-to-br from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
                 Pun AI
             </h1>
-            {/* <p className="text-base font-bold">powered by GPT-3</p> */}
+            <p className="text-base font-bold">powered by GPT-3</p>
             <p className="text-sm mb-4">
                 Hey champ! Generate a random pun from a topic to brighten your day
             </p>

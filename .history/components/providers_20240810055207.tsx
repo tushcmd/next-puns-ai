@@ -9,5 +9,5 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
-    return <ThemeProvider defaultTheme="system" attribute='class' enableSystem>{children}</ThemeProvider>
+    return <ThemeProvider>{children}</ThemeProvider>
 }

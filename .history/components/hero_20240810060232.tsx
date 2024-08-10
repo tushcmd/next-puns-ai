@@ -4,7 +4,7 @@ import { useState, FormEvent, useRef } from "react";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Download, Loader2, Twitter } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import html2canvas from 'html2canvas';
 
 export default function Hero() {
@@ -67,7 +67,7 @@ export default function Hero() {
             <h1 className="text-3xl font-bold pb-4 bg-gradient-to-br from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
                 Pun AI
             </h1>
-            {/* <p className="text-base font-bold">powered by GPT-3</p> */}
+            <p className="text-base font-bold">powered by GPT-3</p>
             <p className="text-sm mb-4">
                 Hey champ! Generate a random pun from a topic to brighten your day
             </p>
@@ -79,12 +79,12 @@ export default function Hero() {
                         ) : punLoadingError ? (
                             <p className="text-red-500">Something went wrong. Please try again.</p>
                         ) : pun ? (
-                            <p className="text-md text-center">{pun}</p>
+                            <p className="text-lg text-center">{pun}</p>
                         ) : (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="120"
-                                height="120"
+                                width="80"
+                                height="80"
                                 fill="#34b29b"
                                 viewBox="0 0 256 256"
                             >
@@ -112,23 +112,16 @@ export default function Hero() {
             {pun && (
                 <div className="flex space-x-4">
                     <Button onClick={downloadPunAsImage} variant="outline">
-                        <Download className="mr-2 h-4 w-4" />
-                        Download
+                        Download as Image
                     </Button>
                     <Button onClick={shareOnTwitter} variant="outline">
-                        <Twitter className="mr-2 h-4 w-4" />
-                        Tweet
+                        Share on Twitter
                     </Button>
                 </div>
             )}
         </div>
     );
 }
-
-
-
-
-
 
 // pun in a card
 

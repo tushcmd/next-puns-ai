@@ -3,7 +3,7 @@
 import { useState, FormEvent, useRef } from "react";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Download, Loader2, Twitter } from "lucide-react"
 import html2canvas from 'html2canvas';
 
@@ -63,30 +63,29 @@ export default function Hero() {
     };
 
     return (
-        <div className="flex flex-col relative justify-center items-center h-screen md:py-10 py-6 overflow-wrap max-w-3xl px-5">
-            <h1 className="text-3xl font-bold pb-4 bg-gradient-to-br from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
-                Pun AI
-            </h1>
-            {/* <p className="text-base font-bold">powered by GPT-3</p> */}
-            <p className="text-sm mb-4">
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-6 max-w-2xl mx-auto">
+            <h1 className="text-4xl font-bold text-primary">Pun AI</h1>
+            <p className="text-xl font-semibold text-secondary">powered by GPT-3</p>
+            <p className="text-lg text-center text-muted-foreground">
                 Hey champ! Generate a random pun from a topic to brighten your day
             </p>
-            <Card className="w-full mb-4">
-                <CardContent className="pt-6">
-                    <div ref={punRef} className="relative w-full flex items-center justify-center aspect-[10/5] min-h-[200px]">
+            <Card className="w-full">
+                <CardContent className="p-6">
+                    <div ref={punRef} className="flex items-center justify-center h-48 text-center">
                         {punLoading ? (
-                            <Loader2 className="h-8 w-8 animate-spin" />
+                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
                         ) : punLoadingError ? (
-                            <p className="text-red-500">Something went wrong. Please try again.</p>
+                            <p className="text-destructive">Something went wrong. Please try again.</p>
                         ) : pun ? (
-                            <p className="text-md text-center">{pun}</p>
+                            <p className="text-xl">{pun}</p>
                         ) : (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="120"
-                                height="120"
-                                fill="#34b29b"
+                                width="64"
+                                height="64"
+                                fill="currentColor"
                                 viewBox="0 0 256 256"
+                                className="text-muted-foreground"
                             >
                                 <path d="M216,52H40A12,12,0,0,0,28,64V224a11.89,11.89,0,0,0,6.93,10.88A12.17,12.17,0,0,0,40,236a11.89,11.89,0,0,0,7.69-2.83l.06-.06,32.14-28.17A4,4,0,0,1,82.5,204H216a12,12,0,0,0,12-12V64A12,12,0,0,0,216,52Zm4,140a4,4,0,0,1-4,4H82.5a12.1,12.1,0,0,0-7.79,2.87l-32.16,28.2A4,4,0,0,1,36,224V64a4,4,0,0,1,4-4H216a4,4,0,0,1,4,4Zm-56-80a4,4,0,0,1-4,4H96a4,4,0,0,1,0-8h64A4,4,0,0,1,164,112Zm0,32a4,4,0,0,1-4,4H96a4,4,0,0,1,0-8h64A4,4,0,0,1,164,144Z"></path>
                             </svg>
@@ -94,9 +93,11 @@ export default function Hero() {
                     </div>
                 </CardContent>
             </Card>
-            <form onSubmit={handleSubmit} className="flex flex-col mb-8 text-center items-center w-full">
-                <div className="mb-4 w-full">
-                    <label className="pb-2 block">Enter random topic to get pun....</label>
+            <form onSubmit={handleSubmit} className="w-full space-y-4">
+                <div className="space-y-2">
+                    <label htmlFor="prompt-input" className="text-sm font-medium text-foreground">
+                        Enter random topic to get pun....
+                    </label>
                     <Input
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
@@ -105,7 +106,7 @@ export default function Hero() {
                         placeholder="e.g. money, code, fruits"
                     />
                 </div>
-                <Button type="submit" disabled={punLoading}>
+                <Button type="submit" disabled={punLoading} className="w-full">
                     Generate Pun
                 </Button>
             </form>
@@ -124,9 +125,6 @@ export default function Hero() {
         </div>
     );
 }
-
-
-
 
 
 
