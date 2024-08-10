@@ -6,9 +6,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
-export async function POST(req: NextRequest, res: NextRequest) {
+export async function POST(req: NextRequestRequest) {
   try {
-    const body = await req.json();
+    const body = await request.json();
     const { prompt } = body;
 
     console.log('Received prompt:', prompt);

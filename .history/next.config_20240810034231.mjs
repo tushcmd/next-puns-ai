@@ -3,8 +3,8 @@ const nextConfig = {
     pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
     reactStrictMode: true,
     env: {
-        OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
-    },
+     OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
+  },
 };
 
 export default nextConfig;

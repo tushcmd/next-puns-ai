@@ -1,4 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+// app/api/pun/route.ts
+
+import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
@@ -6,12 +8,10 @@ const openai = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
-export async function POST(req: NextRequest, res: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
+    const body = await request.json();
     const { prompt } = body;
-
-    console.log('Received prompt:', prompt);
 
     if (!prompt || typeof prompt !== 'string') {
       return NextResponse.json({ error: 'Invalid or missing prompt' }, { status: 400 });
@@ -21,7 +21,6 @@ export async function POST(req: NextRequest, res: NextRequest) {
       return NextResponse.json({ error: 'Prompt too long (max 100 characters)' }, { status: 400 });
     }
 
-    console.log('Sending request to OpenAI');
     const completion = await openai.chat.completions.create({
       model: 'meta-llama/llama-3.1-8b-instruct:free',
       messages: [
@@ -30,17 +29,17 @@ export async function POST(req: NextRequest, res: NextRequest) {
       ],
       max_tokens: 100,
       temperature: 0.7,
+      presence_penalty: 0.1,
+      frequency_penalty: 0.1,
     });
-
-    console.log('Received response from OpenAI:', completion);
 
     const pun = completion.choices[0].message.content?.trim() || 'Sorry, I couldn\'t generate a pun this time.';
 
-    console.log('Generated pun:', pun);
+    console.log('API response:', { pun });
     return NextResponse.json({ pun });
 
-  } catch (error: any) {
-    console.error('Detailed error in API route:', error);
+  } catch (error) {
+    console.error('Error generating pun:', error);
     return NextResponse.json({ error: 'Failed to generate pun', details: error.message }, { status: 500 });
   }
 }
