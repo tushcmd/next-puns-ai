@@ -53,7 +53,7 @@ export default function Hero() {
     }
 
     return (
-        <div className="flex flex-col relative justify-center items-center h-screen md:py-6 py-4 overflow-wrap max-w-3xl px-5">
+        <div className="flex flex-col relative justify-center items-center h-screen md:py-10 py-6 overflow-wrap max-w-3xl px-5">
             <p className="text-3xl font-bold pb-4 bg-gradient-to-br from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent">
                 Pun AI
             </p>
