@@ -126,9 +126,7 @@ export default function Hero() {
             )}
         </div>
     );
-}
-
-// pun in a card
+}// pun in a card
 
 // 'use client'
 
